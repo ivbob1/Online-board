@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Room</title>
+</head>
+<body>
+    <input type="text" id="room" placeholder="Enter room name">
+    <button onclick="startChat()">Start Chat</button>
+
+    <script>
+        function startChat() {
+            let room = document.getElementById('room').value;
+            if(room) {
+                window.location.href = '/draw/' + room;
+            } else {
+                alert("Please enter a room name");
+            }
+        }
+    </script>
+</body>
+</html>
