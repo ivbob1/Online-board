@@ -17,18 +17,6 @@ socketio = SocketIO(app, manage_session=False)
 def index():
     return render_template('index.html')
 
-# @app.route('/draw', methods=['GET', 'POST'])
-# def draw1():
-#     if(request.method=='POST'):
-#         room = request.form['room']
-#         session['room'] = room
-#         return render_template('draw.html', session = session)
-#     else:
-#         if(session.get('username') is not None):
-#             return render_template('draw.html', session = session)
-#         else:
-#             return redirect(url_for('index'))
-
 boards_points={}
 @app.route('/draw/<room>', methods=['GET', 'POST'])
 def draw2(room):
@@ -49,6 +37,32 @@ def on_draw(line):
         boards_points[room]=[]
     boards_points[room].append(line)
     emit('draw', line, room=room)
+
+@socketio.on('erase_all', namespace='/draw')
+def erase_all():
+    room=session['room']
+    if room not in boards_points:
+        boards_points[room]=[]
+    boards_points[room]=[]
+    emit('erase_all', room=room)
+
+@socketio.on('erase', namespace='/draw')
+def erase(data):
+    room=session['room']
+    if room not in boards_points:
+        boards_points[room]=[]
+    points_new=[];
+    for i in boards_points[room]:
+        x1=i['from']['x']
+        y1=i['from']['y']
+        x3=i['to']['x']
+        y3=i['to']['y']
+        x2=data['center']['x']
+        y2=data['center']['y']
+        if (x1-x2)**2+(y1-y2)**2 > data['R']*data['R'] and (x3-x2)**2+(y3-y2)**2 > data['R']*data['R']:
+            points_new.append(i)
+    boards_points[room]=points_new
+    emit('erase', data, room=room)
     
 if __name__ == '__main__':
     socketio.run(app,debug=True)

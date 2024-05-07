@@ -3,10 +3,10 @@ body, html {
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden; /* Отключает прокрутку */
+  overflow: hidden;
 }
 #canvas {
-  position: absolute; /* Позволяет позиционировать холст относительно окна браузера */
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -16,7 +16,7 @@ body, html {
   position: absolute;
   top: 10px;
   left: 10px;
-  background-color: rgba(255, 255, 255, 0.7); /* Полупрозрачный фон */
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 10px;
   border-radius: 8px;
   box-shadow: 0px 0px 5px rgba(0,0,0,0.3);
@@ -47,29 +47,37 @@ body, html {
   border: 2px solid #fff;
 }
 #brushModal {
-  display: none; /* По умолчанию скрыто */
-  position: absolute; /* Позиционирование относительно ближайшего родителя */
-  z-index: 1; /* Сидеть сверху */
+  display: none;
+  position: absolute; 
+  z-index: 1;
   left: 0;
-  top: 100%; /* Расположение непосредственно под кнопкой "Кисть" */
-  width: 90%; /* Ширина модального окна равна 90% ширины панели инструментов */
-  max-height: 50px; /* Максимальная высота модального окна */
-  background-color: rgba(255, 255, 255, 0.7); /* Полупрозрачный фон */
+  top: 100%;
+  width: 90%; 
+  max-height: 50px; 
+  background-color: rgba(255, 255, 255, 0.7);
+}
+#eraserModal {
+  display: none;
+  position: absolute; 
+  z-index: 1;
+  left: 0;
+  top: 100%;
+  width: 90%; 
+  max-height: 50px; 
+  background-color: rgba(255, 255, 255, 0.7);
 }
 
-/* Модальное содержимое/окно */
 .modal-content {
-  display: flex; /* Добавляем Flexbox */
-  justify-content: space-between; /* Распределяем элементы равномерно по горизонтали */
-  align-items: center; /* Выравниваем элементы по вертикали */
-  background-color: rgba(255, 255, 255, 0.7); /* Полупрозрачный фон */
-  padding: 10px; /* Уменьшаем отступ */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px;
   border: 1px solid #888;
-  border-radius: 10px; /* Скругление углов */
+  border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19); /* Добавляем тень */
 }
 
-/* Закрыть кнопку */
 .close {
   color: #aaaaaa;
   float: right;
@@ -84,8 +92,18 @@ body, html {
   cursor: pointer;
 }
 
-/* Стили для выбора цвета и толщины линии */
 #colorPicker, #lineWidth {
-  /* Ваши текущие стили */
-  flex-basis: 45%; /* Каждый элемент занимает примерно половину пространства */
+  flex-basis: 45%; 
+}
+
+#cursorCircle {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+  border-radius: 50%;
+  pointer-events: none;
+  transition: all 0.1s ease-out;
+  z-index: 1000;
+  display: none;
 }
