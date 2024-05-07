@@ -256,7 +256,6 @@ eraserBtn.onclick = function() {
     }
 }
 
-// Закрываем модальное окно при нажатии на "x"
 span.onclick = function() {
     brushModal.style.display = "none";
 }
