@@ -195,7 +195,6 @@ let activeTool = null;
 function selectTool(tool) {
     if (activeTool) {
         activeTool.classList.remove('active');
-        // Удалить старые обработчики событий
         if(tools.hasOwnProperty(activeTool.id)){
             canvas.removeEventListener('mousedown', tools[activeTool.id].mousedown);
             canvas.removeEventListener('mouseup', tools[activeTool.id].mouseup);
@@ -208,7 +207,6 @@ function selectTool(tool) {
     }
     tool.classList.add('active');
     activeTool = tool;
-    // Добавить новые обработчики событий
     console.log(tool.id);
     if(tools.hasOwnProperty(tool.id)){
         canvas.addEventListener('mousedown', tools[tool.id].mousedown);
