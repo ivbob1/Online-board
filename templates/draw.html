@@ -2,15 +2,26 @@
 <html>
 <head>
     <title>Draw Room</title>
-    <style>
-        #canvas {
-            border: 1px solid black;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.0/socket.io.js"></script>
 </head>
 <body>
     <canvas id="canvas"></canvas>
+    <div id="toolbar">
+        <div class="button" id="zoomIn_button">Увеличить</div>
+        <div class="button" id="zoomOut_button">Уменьшить</div>
+        <div class="button" id="brush">Кисть</div>
+        <div class="button" id="eraser">Ластик</div>
+        <div class="button" id="move">Движение</div>
+        <div class="button" id="zoomIn">Очистить</div>
+        <div id="brushModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p>Выберите цвет: <input type="color" id="colorPicker"></p>
+                <p>Выберите толщину линии: <input type="range" id="lineWidth" min="1" max="10"></p>
+            </div>
+        </div>
+    </div>
     <script>
         let points = JSON.parse('{{ points | tojson | safe }}');
     </script>
